@@ -20,7 +20,7 @@ playerBServeSlider.addEventListener("input", () => {
   playerBServeValue.textContent = `${playerBServeSlider.value}%`; // Add the % symbol
 });
 
-// Simulate matches and update results
+// Simulate matches and update results 
 simulateBtn.addEventListener("click", () => {
   const playerAProb = parseFloat(playerAServeSlider.value) / 100;
   const playerBProb = parseFloat(playerBServeSlider.value) / 100;
