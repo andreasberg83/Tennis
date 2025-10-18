@@ -121,25 +121,38 @@ input[type="range"]::-moz-range-thumb:hover {
 
 .win-percentage {
   display: flex;
-  height: 30px;
+  height: 30px; /* Height of the win-percentage bar */
   margin: 20px 0;
-  border: 1px solid #ccc;
+  border: none; /* Optional: Border for the container */
+  overflow: hidden; /* Prevent bars from overflowing */
 }
 
+/* Shared styles for all bars */
 .bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
+  justify-content: center; /* Center the text horizontally */
+  height: 100%; /* Ensure the bar fills the height */
+  text-align: center;
+  color: white; /* Text color */
   font-weight: bold;
+  position: relative; /* Allow positioning of text */
+  overflow: hidden; /* Prevent text from overflowing the bar */
+  padding: 0 5px; /* Add padding to prevent text from touching edges */
 }
 
-.playerA-bar {
-  background-color: #4CAF50;
+/* Specific styles for Player A */
+.win-percentage .playerA-bar {
+  background-color: #4CAF50; /* Green for Player A */
+  text-align: left; /* Align text to the left */
+  padding-left: 5px; /* Add padding to ensure text stays inside */
 }
 
-.playerB-bar {
-  background-color: #2196F3;
+/* Specific styles for Player B */
+.win-percentage .playerB-bar {
+  background-color: #2196F3; /* Blue for Player B */
+  text-align: right; /* Align text to the right */
+  padding-right: 5px; /* Add padding to ensure text stays inside */
 }
 
 /* Legend Section */
@@ -240,15 +253,15 @@ input[type="range"]::-moz-range-thumb:hover {
   display: flex;
   justify-content: space-between; /* Space bars evenly */
   align-items: flex-end; /* Align bars to the bottom */
-  height: 300px; /* Set the fixed height for the bar graph */
+  height: 300px; /* Set a fixed height for the graph */
   width: 100%;
   max-width: 800px; /* Optional: Limit the graph width */
   margin: 20px auto;
-  border-left: 2px solid #333; /* Y-axis */
-  border-bottom: 2px solid #333; /* X-axis */
+  /* Remove the x and y axes */
+  border-left: none; /* Remove the y-axis */
+  border-bottom: none; /* Remove the x-axis */
   padding: 10px;
   position: relative;
-  overflow: hidden; /* Ensure bars stay within the container */
 }
 
 /* Individual bars */

@@ -72,9 +72,13 @@ simulateBtn.addEventListener("click", () => {
   const playerAWinPercentage = (results.playerAWins / numMatches) * 100;
   const playerBWinPercentage = (results.playerBWins / numMatches) * 100;
 
-  // Update bar widths
+  // Update bar widths dynamically
   playerABar.style.width = `${playerAWinPercentage}%`;
   playerBBar.style.width = `${playerBWinPercentage}%`;
+
+  // Ensure the classes are not overwritten
+  playerABar.classList.add("playerA-bar");
+  playerBBar.classList.add("playerB-bar");
 
   // Update bar text to show only the percentage
   playerABar.textContent = `${playerAWinPercentage.toFixed(1)}%`;
