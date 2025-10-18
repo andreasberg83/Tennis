@@ -228,3 +228,47 @@ input[type="range"]::-moz-range-thumb:hover {
   opacity: 1; /* Make the tooltip visible */
   transform: translateX(-50%) translateY(-5px); /* Slightly move the tooltip upward */
 }
+
+/* Bar graph container */
+.bar-graph {
+  display: flex;
+  justify-content: space-between; /* Space bars evenly */
+  align-items: flex-end; /* Align bars to the bottom */
+  height: 300px; /* Height of the graph */
+  width: 100%;
+  max-width: 800px; /* Optional: Limit the graph width */
+  margin: 20px auto;
+  border-left: 2px solid #333; /* Y-axis */
+  border-bottom: 2px solid #333; /* X-axis */
+  padding: 10px;
+  position: relative;
+}
+
+/* Individual bars */
+.bar {
+  width: 40px; /* Width of each bar */
+  background-color: #4CAF50; /* Default bar color */
+  border-radius: 5px 5px 0 0; /* Rounded top corners */
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect for bars */
+.bar:hover {
+  background-color: #45a049;
+}
+
+/* Labels for the x-axis */
+.bar-label {
+  text-align: center;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Y-axis labels */
+.y-axis-label {
+  position: absolute;
+  left: -30px;
+  font-size: 12px;
+  color: #333;
+}

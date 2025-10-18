@@ -20,6 +20,44 @@ playerBServeSlider.addEventListener("input", () => {
   playerBServeValue.textContent = `${playerBServeSlider.value}%`; // Add the % symbol
 });
 
+// Function to generate the bar graph
+function generateScoreDistributionGraph(scoreDistribution) {
+  const barGraph = document.querySelector(".bar-graph");
+  barGraph.innerHTML = ""; // Clear any existing bars
+
+  // Total sets for normalization
+  const totalSets = Object.values(scoreDistribution).reduce((sum, value) => sum + value, 0);
+
+  // Scores in the required order
+  const scores = ["6-0", "6-1", "6-2", "6-3", "6-4", "7-5", "7-6", "6-7", "5-7", "4-6", "3-6", "2-6", "1-6", "0-6"];
+
+  // Generate bars for each score
+  scores.forEach(score => {
+    const percentage = ((scoreDistribution[score] || 0) / totalSets) * 100;
+
+    // Create the bar
+    const bar = document.createElement("div");
+    bar.classList.add("bar");
+    bar.style.height = `${percentage}%`;
+    bar.title = `${score}: ${percentage.toFixed(1)}%`;
+
+    // Create the label
+    const label = document.createElement("div");
+    label.classList.add("bar-label");
+    label.textContent = score;
+
+    // Append the bar and label to the graph
+    const barContainer = document.createElement("div");
+    barContainer.style.display = "flex";
+    barContainer.style.flexDirection = "column";
+    barContainer.style.alignItems = "center";
+    barContainer.appendChild(bar);
+    barContainer.appendChild(label);
+
+    barGraph.appendChild(barContainer);
+  });
+}
+
 // Simulate matches and update results 
 simulateBtn.addEventListener("click", () => {
   const playerAProb = parseFloat(playerAServeSlider.value) / 100;
@@ -39,4 +77,25 @@ simulateBtn.addEventListener("click", () => {
   // Update bar text to show only the percentage
   playerABar.textContent = `${playerAWinPercentage.toFixed(1)}%`;
   playerBBar.textContent = `${playerBWinPercentage.toFixed(1)}%`;
+
+  // Example score distribution (replace with actual results from simulation)
+  const scoreDistribution = {
+    "6-0": 100,
+    "6-1": 200,
+    "6-2": 150,
+    "6-3": 300,
+    "6-4": 250,
+    "7-5": 100,
+    "7-6": 200,
+    "6-7": 150,
+    "5-7": 100,
+    "4-6": 250,
+    "3-6": 300,
+    "2-6": 150,
+    "1-6": 200,
+    "0-6": 100
+  };
+
+  // Generate the bar graph
+  generateScoreDistributionGraph(scoreDistribution);
 });
