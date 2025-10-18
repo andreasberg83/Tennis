@@ -153,7 +153,7 @@ function simulateMatchWithScore(playerAProb, playerBProb) {
 
   while (true) {
     const setResult = simulateSetWithScore(playerAIsServing, playerAProb, playerBProb);
-    console.log(playerAIsServing ? "Player A served first this set." : "Player B served first this set.");
+    //console.log(playerAIsServing ? "Player A served first this set." : "Player B served first this set.");
     const { winner, score } = setResult;
 
     setScores.push(score);
@@ -183,28 +183,39 @@ function simulateMatchWithScore(playerAProb, playerBProb) {
 }
 
 // Simulate multiple matches
-function simulateMatches(numMatches, playerAProb = playerA.serveWin, playerBProb = playerB.serveWin) {
-  const results = { playerAWins: 0, playerBWins: 0 };
+function simulateMatches(numMatches, playerAProb, playerBProb) {
+  const results = { playerAWins: 0, playerBWins: 0, matchResults: [], scoreDistribution: {} };
 
   for (let i = 0; i < numMatches; i++) {
     const matchResult = simulateMatchWithScore(playerAProb, playerBProb);
     const { winner, score } = matchResult;
 
+    // Store the match result
+    results.matchResults.push(matchResult);
+
+    // Update the match win count
     if (winner === "Player A") {
       results.playerAWins++;
     } else {
       results.playerBWins++;
     }
-
-    console.log(`Match ${i + 1}: ${winner} wins with score ${score}`);
   }
 
-  console.log(`\nResults after ${numMatches} matches:`);
-  console.log(`Player A Wins: ${results.playerAWins}`);
-  console.log(`Player B Wins: ${results.playerBWins}`);
+  // Calculate the score distribution based on set results
+  results.matchResults.forEach(match => {
+    // Extract the part of the score string inside parentheses
+    const setScoresString = match.score.match(/\(([^)]+)\)/);
+    if (setScoresString) {
+      // Split the set scores by commas and trim any whitespace
+      const setScores = setScoresString[1].split(",").map(score => score.trim());
+      setScores.forEach(setScore => {
+        if (!results.scoreDistribution[setScore]) {
+          results.scoreDistribution[setScore] = 0;
+        }
+        results.scoreDistribution[setScore]++;
+      });
+    }
+  });
+
   return results;
 }
-
-//window.simulateMatches = simulateMatches;
-// Run the simulation for 10 matches
-//simulateMatches(10000);

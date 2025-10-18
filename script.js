@@ -33,12 +33,13 @@ function generateScoreDistributionGraph(scoreDistribution) {
 
   // Generate bars for each score
   scores.forEach(score => {
-    const percentage = ((scoreDistribution[score] || 0) / totalSets) * 100;
+    const percentage = ((scoreDistribution[score] || 0) / totalSets) * 300;
+    console.log(`Score: ${score}, Percentage: ${percentage}`); // Debugging log
 
     // Create the bar
     const bar = document.createElement("div");
     bar.classList.add("bar");
-    bar.style.height = `${percentage}%`;
+    bar.style.height = `${percentage}px`; // Ensure a minimum height of 1%
     bar.title = `${score}: ${percentage.toFixed(1)}%`;
 
     // Create the label
@@ -54,6 +55,7 @@ function generateScoreDistributionGraph(scoreDistribution) {
     barContainer.appendChild(bar);
     barContainer.appendChild(label);
 
+    console.log(`Bar created for ${score} with height ${bar.style.height}`); // Debugging log
     barGraph.appendChild(barContainer);
   });
 }
@@ -63,8 +65,8 @@ simulateBtn.addEventListener("click", () => {
   const playerAProb = parseFloat(playerAServeSlider.value) / 100;
   const playerBProb = parseFloat(playerBServeSlider.value) / 100;
 
-  // Call the backend simulation
-  const numMatches = 10000; // Number of matches to simulate
+  // Simulate matches
+  const numMatches = 10000;
   const results = simulateMatches(numMatches, playerAProb, playerBProb);
 
   const playerAWinPercentage = (results.playerAWins / numMatches) * 100;
@@ -78,24 +80,7 @@ simulateBtn.addEventListener("click", () => {
   playerABar.textContent = `${playerAWinPercentage.toFixed(1)}%`;
   playerBBar.textContent = `${playerBWinPercentage.toFixed(1)}%`;
 
-  // Example score distribution (replace with actual results from simulation)
-  const scoreDistribution = {
-    "6-0": 100,
-    "6-1": 200,
-    "6-2": 150,
-    "6-3": 300,
-    "6-4": 250,
-    "7-5": 100,
-    "7-6": 200,
-    "6-7": 150,
-    "5-7": 100,
-    "4-6": 250,
-    "3-6": 300,
-    "2-6": 150,
-    "1-6": 200,
-    "0-6": 100
-  };
-
-  // Generate the bar graph
-  generateScoreDistributionGraph(scoreDistribution);
+  // Generate the bar graph for score distribution
+  generateScoreDistributionGraph(results.scoreDistribution);
+  console.log(results.scoreDistribution);
 });

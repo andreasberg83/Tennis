@@ -1,4 +1,8 @@
 /* General Styles */
+html, body {
+  height: 100%; /* Ensure the root elements have a height */
+}
+
 body {
   font-family: 'Lato', sans-serif;
   font-size: 20px;
@@ -12,6 +16,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  height: 100%; /* Ensure the container has a height */
 }
 
 /* Update headings for a modern look */
@@ -111,6 +116,7 @@ input[type="range"]::-moz-range-thumb:hover {
 /* Output Section */
 .output-section {
   margin: 20px 0;
+  height: 100%; /* Ensure the output section has a height */
 }
 
 .win-percentage {
@@ -234,7 +240,7 @@ input[type="range"]::-moz-range-thumb:hover {
   display: flex;
   justify-content: space-between; /* Space bars evenly */
   align-items: flex-end; /* Align bars to the bottom */
-  height: 300px; /* Height of the graph */
+  height: 300px; /* Set the fixed height for the bar graph */
   width: 100%;
   max-width: 800px; /* Optional: Limit the graph width */
   margin: 20px auto;
@@ -242,6 +248,7 @@ input[type="range"]::-moz-range-thumb:hover {
   border-bottom: 2px solid #333; /* X-axis */
   padding: 10px;
   position: relative;
+  overflow: hidden; /* Ensure bars stay within the container */
 }
 
 /* Individual bars */
