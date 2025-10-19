@@ -33,13 +33,13 @@ function generateScoreDistributionGraph(scoreDistribution) {
 
   // Generate bars for each score
   scores.forEach(score => {
-    const percentage = ((scoreDistribution[score] || 0) / totalSets) * 300;
-    console.log(`Score: ${score}, Percentage: ${percentage}`); // Debugging log
+    const percentage = ((scoreDistribution[score] || 0) / totalSets) * 100;
 
     // Create the bar
     const bar = document.createElement("div");
-    bar.classList.add("bar");
-    bar.style.height = `${percentage}px`; // Ensure a minimum height of 1%
+    bar.classList.add("score-distribution-bar"); // Use only the specific class for score distribution bars
+
+    bar.style.width = `${percentage}%`; // Set the width of the bar
     bar.title = `${score}: ${percentage.toFixed(1)}%`;
 
     // Create the label
@@ -50,12 +50,10 @@ function generateScoreDistributionGraph(scoreDistribution) {
     // Append the bar and label to the graph
     const barContainer = document.createElement("div");
     barContainer.style.display = "flex";
-    barContainer.style.flexDirection = "column";
     barContainer.style.alignItems = "center";
-    barContainer.appendChild(bar);
     barContainer.appendChild(label);
+    barContainer.appendChild(bar);
 
-    console.log(`Bar created for ${score} with height ${bar.style.height}`); // Debugging log
     barGraph.appendChild(barContainer);
   });
 }
